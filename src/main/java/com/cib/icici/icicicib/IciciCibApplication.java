@@ -45,22 +45,15 @@ public class IciciCibApplication {
         System.out.println(requestData);
         System.out.println("---------------------------------------------------------");
         String encryptedRequest = Encryption.encrypt(requestData);
-        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
+        System.out.println("\n---------------EncryptedText)-----------------");
         System.out.println(encryptedRequest);
         System.out.println("---------------------------------------------------------");
-
-
-
 
 
         RestTemplate restTemplate = new RestTemplate();
         Object result = restTemplate.postForObject( URL, encryptedRequest, Object.class);
         System.out.println(result);
-
-
     }
-
-
 
 
     public static void main(String[] args) throws Exception{

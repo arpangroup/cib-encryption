@@ -84,7 +84,7 @@ public class Encryption {
     }
 
     private static RSAPublicKey getRSAPublicKey() throws CertificateException, IOException {
-        String certData = "Here You have to pass ICICI public key content";
+        String certData = Util.getICICIPublicCertifificate();
 
         InputStream inStream = new ByteArrayInputStream(certData.getBytes());
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
@@ -114,5 +114,4 @@ public class Encryption {
 
         return decryptedData;
     }
-
 }
