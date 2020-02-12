@@ -83,7 +83,7 @@ public class Encryption {
         return Encryption.decCipher;
     }
 
-    private static RSAPublicKey getRSAPublicKey() throws CertificateException, IOException {
+    public static RSAPublicKey getRSAPublicKey() throws CertificateException, IOException {
         String certData = Util.getICICIPublicCertifificate();
 
         InputStream inStream = new ByteArrayInputStream(certData.getBytes());

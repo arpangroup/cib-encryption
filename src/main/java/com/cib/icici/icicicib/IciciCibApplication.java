@@ -14,6 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
 
+import java.nio.charset.StandardCharsets;
+
 @SpringBootApplication
 public class IciciCibApplication {
     /*========================================================
@@ -45,6 +47,7 @@ public class IciciCibApplication {
         System.out.println(requestData);
         System.out.println("---------------------------------------------------------");
         String encryptedRequest = Encryption.encrypt(requestData);
+//        String encryptedRequest = new String(RsaUtil.encryptData(requestData), StandardCharsets.UTF_8);
         System.out.println("\n---------------EncryptedText)-----------------");
         System.out.println(encryptedRequest);
         System.out.println("---------------------------------------------------------");

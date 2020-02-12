@@ -139,14 +139,16 @@ public class RsaUtil {
 
 
     // Encrypt using RSA public key
-    public static byte[] encryptData(String data) throws IOException {
+    public static byte[] encryptData(String data) throws Exception {
         System.out.println("\n------------------ENCRYPTION STARTED------------------");
         System.out.println("Data Before Encryption : " + data);
 
         byte[] dataToEncrypt = data.getBytes();
         byte[] encryptedData = null;
         try{
-            PublicKey publicKey = readPublicKeyFromFile(PUBLIC_KEY_FILE);
+//            PublicKey publicKey = readPublicKeyFromFile(PUBLIC_KEY_FILE);
+            PublicKey publicKey = Encryption.getRSAPublicKey();
+
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             encryptedData = cipher.doFinal(dataToEncrypt);
