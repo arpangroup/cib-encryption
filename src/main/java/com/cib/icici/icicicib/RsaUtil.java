@@ -18,7 +18,8 @@ import java.util.Map;
 public class RsaUtil {
 
     private static final String PUBLIC_KEY_FILE  = "public.key";
-    private static final String PRIVATE_KEY_FILE = "private.key";
+//    private static final String PRIVATE_KEY_FILE = "private.key";
+    private static final String PRIVATE_KEY_FILE = "apache-selfsigned.key";
 
 
     private void saveKeys(String fileName, BigInteger mod, BigInteger exp) throws IOException {

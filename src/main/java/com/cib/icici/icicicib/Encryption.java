@@ -70,7 +70,7 @@ public class Encryption {
         // Obtain a RSA Cipher Object
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 
-        String pvtKey = "Here You have to pass private Key content";
+        String pvtKey = Util.getICICIPrivateKey();
 
         PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(pvtKey));
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
