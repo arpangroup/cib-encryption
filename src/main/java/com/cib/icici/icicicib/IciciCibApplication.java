@@ -1,5 +1,6 @@
 package com.cib.icici.icicicib;
 
+import com.google.gson.Gson;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -80,6 +81,45 @@ public class IciciCibApplication {
     }
 
 
+
+    public static String registerNew() throws Exception{
+        String URL       = "https://apigwuat.icicibank.com:8443/api/Corporate/CIB/v1/Registration";
+        String API_KEY   = "685d26c8-a367-4733-9aae-cfa9dbc6252b";
+        String IP_ADDR   = "159.89.170.197"; //68.183.92.75
+
+        /*================HEADERS==============================*/
+        HttpHeaders headers = new HttpHeaders();
+//        headers.set("x-forwarded-for", IP_ADDR);
+        headers.set("host", "apigwuat.icicibank.com:8443");
+        //headers.set("apikey", "685d26c8-a367-4733-9aae-cfa9dbc6252b");
+        headers.set("content-length", "684");
+        headers.set("Accept", "*/*");
+        headers.set("Content-Type", "text/plain");
+        headers.add("apikey", "685d26c8-a367-4733-9aae-cfa9dbc6252b" );
+
+        /*================EncryptedBody==============================*/
+        String requestData = Util.getRequestData();
+
+        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
+        System.out.println(requestData);
+        System.out.println("---------------------------------------------------------");
+        String encryptedRequest = Encryption.encrypt(requestData);
+//        String encryptedRequest = new String(RsaUtil.encryptData(requestData), StandardCharsets.UTF_8);
+        System.out.println("\n---------------EncryptedText-----------------");
+        System.out.println(encryptedRequest);
+        System.out.println("---------------------------------------------------------");
+
+        HttpEntity<String> entity = new HttpEntity<String>(encryptedRequest, headers);
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.postForObject( URL, entity, String.class);
+        System.out.println(result);
+
+        return result;
+    }
+
+
     private static PrivateKey readPrivateKeyFromFile(String fileName) throws IOException {
         FileInputStream fis    = null;
         ObjectInputStream ois = null;
@@ -127,11 +167,11 @@ public class IciciCibApplication {
 
     public static void main(String[] args) throws Exception{
         SpringApplication.run(IciciCibApplication.class, args);
-        String encryptedResponse = register();
+        String encryptedResponse = registerNew();
         System.out.println("==================================================================================");
 
-//        String decryptText = Encryption.decrypt(encryptedResponse);
-        String decryptText = RsaUtil.decryptData(encryptedResponse.getBytes());
+        String decryptText = Encryption.decrypt(encryptedResponse);
+//        String decryptText = RsaUtil.decryptData(encryptedResponse.getBytes());
         System.out.println("\n========================DECRYPTED_DATA_FROM_ICICI===============================");
         System.out.println(decryptText);
         System.out.println("==================================================================================");
