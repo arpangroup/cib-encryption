@@ -1,5 +1,8 @@
 package com.cib.icici.icicicib;
 
+import com.cib.icici.icicicib.properties.CibProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
@@ -18,6 +21,10 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 
 public class Encryption {
+
+    @Autowired
+    CibProperties cibProperties;
+
     private static Cipher encCipher = null;
     private static Cipher decCipher = null;
 

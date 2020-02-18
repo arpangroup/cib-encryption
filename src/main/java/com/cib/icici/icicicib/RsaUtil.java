@@ -17,50 +17,51 @@ import java.util.Map;
 
 public class RsaUtil {
 
-    private static final String PUBLIC_KEY_FILE  = "public.key";
-//    private static final String PRIVATE_KEY_FILE = "private.key";
+    private static final String PUBLIC_KEY_FILE = "public.key";
+    //    private static final String PRIVATE_KEY_FILE = "private.key";
     private static final String PRIVATE_KEY_FILE = "apache-selfsigned.key";
 
 
     private void saveKeys(String fileName, BigInteger mod, BigInteger exp) throws IOException {
-        FileOutputStream fos   = null;
+        FileOutputStream fos = null;
         ObjectOutputStream oos = null;
 
-        try{
+        try {
             System.out.println("Generating " + fileName + " ...");
             fos = new FileOutputStream(fileName);
             oos = new ObjectOutputStream(new BufferedOutputStream(fos));
             oos.writeObject(mod);
             oos.writeObject(exp);
             System.out.println(fileName + " generated successfully");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if(oos != null){
+        } finally {
+            if (oos != null) {
                 oos.close();
-                if(fos != null){
+                if (fos != null) {
                     fos.close();
                 }
             }
         }
     }
+
     private static PublicKey readPublicKeyFromFile(String fileName) throws IOException {
-        FileInputStream fis    = null;
-        ObjectInputStream ois  = null;
-        try{
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+        try {
             fis = new FileInputStream(new File(fileName));
             ois = new ObjectInputStream(fis);
-            BigInteger modulus  = (BigInteger) ois.readObject();
+            BigInteger modulus = (BigInteger) ois.readObject();
             BigInteger exponent = (BigInteger) ois.readObject();
             //Get Private Key
             RSAPublicKeySpec rsaPublicKeySpec = new RSAPublicKeySpec(modulus, exponent);
             KeyFactory factory = KeyFactory.getInstance("RSA");
             PublicKey publicKey = factory.generatePublic(rsaPublicKeySpec);
             return publicKey;
-        }catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeySpecException e){
+        } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
             return null;
-        }finally {
+        } finally {
             if (ois != null) {
                 ois.close();
                 if (fis != null) {
@@ -69,26 +70,27 @@ public class RsaUtil {
             }
         }
     }
+
     private static PrivateKey readPrivateKeyFromFile(String fileName) throws IOException {
-        FileInputStream fis    = null;
+        FileInputStream fis = null;
         ObjectInputStream ois = null;
-        try{
+        try {
             fis = new FileInputStream(new File(fileName));
             ois = new ObjectInputStream(fis);
-            BigInteger modulus  = (BigInteger) ois.readObject();
+            BigInteger modulus = (BigInteger) ois.readObject();
             BigInteger exponent = (BigInteger) ois.readObject();
             //Get Private Key
             RSAPrivateKeySpec rsaPrivateKeySpec = new RSAPrivateKeySpec(modulus, exponent);
             KeyFactory factory = KeyFactory.getInstance("RSA");
             PrivateKey privateKey = factory.generatePrivate(rsaPrivateKeySpec);
             return privateKey;
-        }catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeySpecException e){
+        } catch (IOException | ClassNotFoundException | NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
             return null;
-        }finally {
-            if(ois != null){
+        } finally {
+            if (ois != null) {
                 ois.close();
-                if(fis != null){
+                if (fis != null) {
                     fis.close();
                 }
             }
@@ -106,12 +108,12 @@ public class RsaUtil {
 
         System.out.println("\n-------------------------PULLING OUT PARAMETERS WHICH MAKES KEYPAIR-------------------------\n");
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        RSAPublicKeySpec rsaPublicKeySpec      = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+        RSAPublicKeySpec rsaPublicKeySpec = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
         RSAPrivateCrtKeySpec rsaPrivateKeySpec = keyFactory.getKeySpec(privateKey, RSAPrivateCrtKeySpec.class);
 
         System.out.println("\n-------------------------SAVING PUBLIC KEY AND PRIVATE KEY TO FILES-------------------------\n");
         RsaUtil rsaUtil = new RsaUtil();
-        rsaUtil.saveKeys(PUBLIC_KEY_FILE,  rsaPublicKeySpec.getModulus(),  rsaPublicKeySpec.getPublicExponent());
+        rsaUtil.saveKeys(PUBLIC_KEY_FILE, rsaPublicKeySpec.getModulus(), rsaPublicKeySpec.getPublicExponent());
         rsaUtil.saveKeys(PRIVATE_KEY_FILE, rsaPrivateKeySpec.getModulus(), rsaPrivateKeySpec.getPrivateExponent());
 
     }
@@ -127,16 +129,15 @@ public class RsaUtil {
 
         System.out.println("\n-------------------------PULLING OUT PARAMETERS WHICH MAKES KEYPAIR-------------------------\n");
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        RSAPublicKeySpec rsaPublicKeySpec      = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+        RSAPublicKeySpec rsaPublicKeySpec = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
         RSAPrivateCrtKeySpec rsaPrivateKeySpec = keyFactory.getKeySpec(privateKey, RSAPrivateCrtKeySpec.class);
 
         System.out.println("\n-------------------------SAVING PUBLIC KEY AND PRIVATE KEY TO FILES-------------------------\n");
         RsaUtil rsaUtil = new RsaUtil();
-        rsaUtil.saveKeys(PUBLIC_KEY_FILE,  rsaPublicKeySpec.getModulus(),  rsaPublicKeySpec.getPublicExponent());
+        rsaUtil.saveKeys(PUBLIC_KEY_FILE, rsaPublicKeySpec.getModulus(), rsaPublicKeySpec.getPublicExponent());
         rsaUtil.saveKeys(PRIVATE_KEY_FILE, rsaPrivateKeySpec.getModulus(), rsaPrivateKeySpec.getPrivateExponent());
 
     }
-
 
 
     // Encrypt using RSA public key
@@ -146,7 +147,7 @@ public class RsaUtil {
 
         byte[] dataToEncrypt = data.getBytes();
         byte[] encryptedData = null;
-        try{
+        try {
 //            PublicKey publicKey = readPublicKeyFromFile(PUBLIC_KEY_FILE);
             PublicKey publicKey = Encryption.getRSAPublicKey();
 
@@ -154,7 +155,7 @@ public class RsaUtil {
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             encryptedData = cipher.doFinal(dataToEncrypt);
             System.out.println("Encrypted Data: " + new String(encryptedData));
-        }catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
         }
         System.out.println("------------------ENCRYPTION COMPLETED------------------");
@@ -165,13 +166,13 @@ public class RsaUtil {
     public static String decryptData(byte[] data) throws IOException {
         System.out.println("\n------------------DECRYPTION STARTED------------------");
         byte[] decryptedData = null;
-        try{
+        try {
             PrivateKey privateKey = readPrivateKeyFromFile(PRIVATE_KEY_FILE);
             Cipher cipher = Cipher.getInstance("RSA");
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             decryptedData = cipher.doFinal(data);
             System.out.println("Decrypted Data: " + new String(decryptedData));
-        }catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e){
+        } catch (IOException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
         }
         System.out.println("------------------DECRYPTION COMPLETED------------------");
