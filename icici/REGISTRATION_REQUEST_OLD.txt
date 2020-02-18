@@ -1,0 +1,9 @@
+{
+  "AGGRID"   : "CUST0161",
+  "AGGRNAME" : "HADRU",
+  "CORPID"   : "CIBNEXT",
+  "USERID"   : "CIBTESTING6",
+  "URN"      : "1111",
+  "ALIASID"  : ""
+
+}
