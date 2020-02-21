@@ -25,6 +25,27 @@ public class CibProperties {
     @NotBlank
     private String apikey;
 
+
+
+
+
     @NotBlank
     private String urlregistration;
+
+
+    @NotBlank
+    private String urltransaction;
+
+    @NotBlank
+    private String urltransactioninquery;
+
+    @NotBlank
+    private String urlaccountstatement;
+
+    @NotBlank
+    private String urlbalanceinquery;
+
+    @NotBlank
+    private String urlregistrationstatus;
+
 }

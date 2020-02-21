@@ -3,7 +3,22 @@ GET http://localhost:8082/register
 
 ###
 
-
-GET http://68.183.92.75:8082/register
+GET http://localhost:8082/transaction
 
 ###
+
+GET http://localhost:8082/transaction_inquiry
+
+###
+
+
+GET http://localhost:8082/balance
+
+
+###
+
+
+GET http://localhost:8082/account_statement
+
+###
+

@@ -41,6 +41,7 @@ public class Util {
 
 
     public static String getICICIPrivateKey() throws IOException {
+        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
         String fileName = "./icici/PRIVATE_KEY.txt";
 //        String fileName = new CibProperties().getPrivatekey();
         Path filePath = Paths.get(fileName);
@@ -56,7 +57,7 @@ public class Util {
     }
 
 
-    public static String getRequestData() throws IOException {
+    public static String getRegistrationRequestData() throws IOException {
         String fileName = "./icici/REGISTRATION_REQUEST.txt";
 //        String fileName = new CibProperties().getRequest();
         Path filePath = Paths.get(fileName);
@@ -69,6 +70,65 @@ public class Util {
         result = fileContent;
         System.out.println(result);
         System.out.println("=========########========================================########========");
+        return result;
+    }
+
+
+    public static String getTransactionRequestData() throws IOException {
+        String fileName = "./icici/TRANSACTION.txt";
+        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
+        Path filePath = Paths.get(fileName);
+
+        String result = "";
+        Path path = filePath;
+        String fileContent = new String(Files.readAllBytes(path));
+        result = fileContent;
+        System.out.println(result);
+        System.out.println("---------------------------------------------------------");
+        return result;
+    }
+
+    public static String getTransactionInquiryRequestData() throws IOException {
+        String fileName = "./icici/TRANSACTION_INQUIRY.txt";
+        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
+        Path filePath = Paths.get(fileName);
+
+        String result = "";
+        Path path = filePath;
+        String fileContent = new String(Files.readAllBytes(path));
+        result = fileContent;
+        System.out.println(result);
+        System.out.println("---------------------------------------------------------");
+        return result;
+    }
+
+
+    public static String getBalanceRequestData() throws IOException {
+        String fileName = "./icici/BALANCE.txt";
+        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
+        Path filePath = Paths.get(fileName);
+
+        String result = "";
+        Path path = filePath;
+        String fileContent = new String(Files.readAllBytes(path));
+        result = fileContent;
+        System.out.println(result);
+        System.out.println("---------------------------------------------------------");
+        return result;
+    }
+
+
+    public static String getAccountStatementRequestData() throws IOException {
+        String fileName = "./icici/ACCOUNT_STATEMENT.txt";
+        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
+        Path filePath = Paths.get(fileName);
+
+        String result = "";
+        Path path = filePath;
+        String fileContent = new String(Files.readAllBytes(path));
+        result = fileContent;
+        System.out.println(result);
+        System.out.println("---------------------------------------------------------");
         return result;
     }
 }

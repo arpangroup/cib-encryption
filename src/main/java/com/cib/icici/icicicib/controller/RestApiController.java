@@ -4,10 +4,13 @@ import com.cib.icici.icicicib.Encryption;
 import com.cib.icici.icicicib.RegistrationRequest;
 import com.cib.icici.icicicib.Util;
 import com.cib.icici.icicicib.properties.CibProperties;
+import com.cib.icici.icicicib.service.CibService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -32,57 +35,42 @@ import java.security.spec.RSAPrivateKeySpec;
 public class RestApiController {
 
     @Autowired
-    CibProperties cibProperties;
-
-    public String registerNew() throws Exception {
-
-        //String URL = "https://apigwuat.icicibank.com:8443/api/Corporate/CIB/v1/Registration";
-        //String API_KEY = "685d26c8-a367-4733-9aae-cfa9dbc6252b";
-        //String IP_ADDR = "159.89.170.197"; //68.183.92.75
-
-        /*================HEADERS==============================*/
-        HttpHeaders headers = new HttpHeaders();
-//        headers.set("x-forwarded-for", IP_ADDR);
-        headers.set("host", "apigwuat.icicibank.com:8443");
-        headers.set("content-length", "684");
-        headers.set("Accept", "*/*");
-        headers.set("Content-Type", "text/plain");
-        headers.add("apikey", cibProperties.getApikey());
-
-        /*================EncryptedBody==============================*/
-        String requestData = new Util().getRequestData();
-
-        System.out.println("\n---------------PlainRequest(UnEncrypted)-----------------");
-        System.out.println(requestData);
-        System.out.println("---------------------------------------------------------");
-        String encryptedRequest = Encryption.encrypt(requestData);
-//        String encryptedRequest = new String(RsaUtil.encryptData(requestData), StandardCharsets.UTF_8);
-        System.out.println("\n---------------EncryptedText-----------------");
-        System.out.println(encryptedRequest);
-        System.out.println("---------------------------------------------------------");
-
-        HttpEntity<String> entity = new HttpEntity<String>(encryptedRequest, headers);
+    CibService cibService;
 
 
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.postForObject(cibProperties.getUrlregistration(), entity, String.class);
-        System.out.println(result);
-
-        return result;
-    }
-
-
-
+    //localhost:8082/register
     @GetMapping("/register")
-    public String registerApi() throws Exception{
-        String encryptedResponse = registerNew();
-        System.out.println("==================================================================================");
-
-        String decryptText = Encryption.decrypt(encryptedResponse);
-//        String decryptText = RsaUtil.decryptData(encryptedResponse.getBytes());
-        System.out.println("\n========================DECRYPTED_DATA_FROM_ICICI===============================");
-        System.out.println(decryptText);
-        System.out.println("==================================================================================");
-        return decryptText;
+    public ResponseEntity<Object>registerApi() throws Exception{
+        return new ResponseEntity<>(cibService.registration(), HttpStatus.OK);
     }
+
+
+    //localhost:8082/transaction
+    @GetMapping("/transaction")
+    public ResponseEntity<Object>transactionApi() throws Exception{
+        return new ResponseEntity<>(cibService.transaction(), HttpStatus.OK);
+    }
+
+
+    //localhost:8082/transaction_inquiry
+    @GetMapping("/transaction_inquiry")
+    public ResponseEntity<Object>transactionInquiryApi() throws Exception{
+        return new ResponseEntity<>(cibService.transactionInquiry(), HttpStatus.OK);
+    }
+
+    //localhost:8082/balance
+    @GetMapping("/balance")
+    public ResponseEntity<Object>balanceApi() throws Exception{
+        return new ResponseEntity<>(cibService.balance(), HttpStatus.OK);
+    }
+
+    //localhost:8082/account_statement
+    @GetMapping("/account_statement")
+    public ResponseEntity<Object>accountStatementApi() throws Exception{
+        return new ResponseEntity<>(cibService.accountStatement(), HttpStatus.OK);
+    }
+
+
+
+
 }

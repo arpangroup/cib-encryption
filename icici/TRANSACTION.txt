@@ -1,0 +1,19 @@
+
+{
+   "AGGRID"       : "CUST0161",
+   "CORPID"       : "571327753",
+   "USERID"       : "DESIRAJC",
+   "URN"          : "1111",
+   "AGGRNAME"     : "HADRU",
+   "DEBITACC"     : "132005001985",
+   "CREDITACC"    : "34056334027",
+   "IFSC"         : "SBIN0008918",
+   "AMOUNT"       : "1.00",
+   "CURRENCY"     : "INR",
+   "TXNTYPE"      : "TPA",
+   "PAYEENAME"    : "Arpan",
+   "UNIQUEID"     : "123456",
+   "REMARKS"      : "Demo Payment test"
+   }
+
+

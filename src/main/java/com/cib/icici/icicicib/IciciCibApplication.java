@@ -35,12 +35,6 @@ import java.security.spec.RSAPrivateKeySpec;
 
 @SpringBootApplication
 public class IciciCibApplication {
-    /*========================================================
-    {
-        Base64Encode(RSA_Encrypt( { "CORPID" : "CIBNEXT", "USERID" : "ERPUSER", "REQUESTTYPE" : "AGREG", …,… }))
-    }
-    ========================================================
-    */
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(IciciCibApplication.class, args);
