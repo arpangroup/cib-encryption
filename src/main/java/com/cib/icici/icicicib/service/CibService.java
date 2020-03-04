@@ -1,13 +1,19 @@
 package com.cib.icici.icicicib.service;
 
+import com.cib.icici.icicicib.Base64Util;
 import com.cib.icici.icicicib.Encryption;
 import com.cib.icici.icicicib.Util;
+import com.cib.icici.icicicib.dto.AccountStatementEncryptResponse;
 import com.cib.icici.icicicib.properties.CibProperties;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 @Service
 public class CibService {
@@ -125,6 +131,55 @@ public class CibService {
 
         RestTemplate restTemplate = new RestTemplate();
         String encryptedResponse  = restTemplate.postForObject(cibProperties.getUrlaccountstatement(), entity, String.class);
+        System.out.println("\n========================ENCRYPTED_DATA_FROM_ICICI===============================");
+        System.out.println(encryptedResponse);
+        System.out.println("==================================================================================");
+
+
+        String decryptText = Encryption.decrypt(encryptedResponse);
+        System.out.println("\n========================DECRYPTED_DATA_FROM_ICICI===============================");
+        System.out.println(decryptText);
+        System.out.println("==================================================================================");
+
+        return decryptText;
+    }
+
+
+    public String accountStatementNew() throws Exception {
+        String requestData = Util.getAccountStatementRequestData();
+        String encryptedRequest =getEncryptedRequest(requestData);
+        HttpHeaders headers = getIciciRequestHeader();
+        HttpEntity<String> entity = new HttpEntity<String>(encryptedRequest, headers);
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        String encryptedResponse  = restTemplate.postForObject(cibProperties.getUrlaccountstatement(), entity, String.class);
+        System.out.println("\n========================ENCRYPTED_DATA_FROM_ICICI===============================");
+        System.out.println(encryptedResponse);
+        System.out.println("==================================================================================");
+
+
+
+        System.out.println("\n========================Step1. DECRYPTING_ENCRYPTED_KEY===============================");
+        Gson gson = new Gson();
+        AccountStatementEncryptResponse responseDto = gson.fromJson(encryptedResponse, AccountStatementEncryptResponse.class);
+        System.out.println("responseDto: "+responseDto);
+        System.out.println("-------------------------------------");
+        String decryptKey = Encryption.decrypt(responseDto.getEncryptedKey());
+        System.out.println("------------DecryptKey-------------------------");
+        System.out.println(decryptKey);
+        System.out.println("========================================================================================");
+
+
+
+
+        System.out.println("\n========================Step2. Base64_DECRYPTING_ENCRYPTED_DATA===============================");
+        System.out.println("------------DecryptData-------------------------");
+        byte[] bytes = Base64.getDecoder().decode(responseDto.getEncryptedData().getBytes(StandardCharsets.UTF_8));
+        String decodedData = new String(bytes);
+        System.out.println(decodedData);
+        System.out.println("========================================================================================");
+
 
 
         String decryptText = Encryption.decrypt(encryptedResponse);

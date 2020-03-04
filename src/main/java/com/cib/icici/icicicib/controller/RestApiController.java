@@ -67,7 +67,7 @@ public class RestApiController {
     //localhost:8082/account_statement
     @GetMapping("/account_statement")
     public ResponseEntity<Object>accountStatementApi() throws Exception{
-        return new ResponseEntity<>(cibService.accountStatement(), HttpStatus.OK);
+        return new ResponseEntity<>(cibService.accountStatementNew(), HttpStatus.OK);
     }
 
 

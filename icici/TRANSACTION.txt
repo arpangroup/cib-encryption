@@ -10,9 +10,9 @@
    "IFSC"         : "SBIN0008918",
    "AMOUNT"       : "1.00",
    "CURRENCY"     : "INR",
-   "TXNTYPE"      : "TPA",
+   "TXNTYPE"      : "RGS",
    "PAYEENAME"    : "Arpan",
-   "UNIQUEID"     : "123456",
+   "UNIQUEID"     : "123456789",
    "REMARKS"      : "Demo Payment test"
    }
 

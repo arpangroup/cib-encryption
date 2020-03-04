@@ -3,10 +3,9 @@
 	"USERID"     : "DESIRAJC",
 	"AGGRID"     : "CUST0161",
 	"ACCOUNTNO"  : "132005001985",
-	"FROMDATE"   : "20-02-2020",
+	"FROMDATE"   : "22-02-2020",
 	"TODATE"     : "22-02-2020",
 	"URN"        : "1111"
-
 }
 
 

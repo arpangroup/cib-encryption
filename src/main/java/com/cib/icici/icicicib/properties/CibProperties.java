@@ -48,4 +48,7 @@ public class CibProperties {
     @NotBlank
     private String urlregistrationstatus;
 
+
+    private String urlOrder;
+
 }
