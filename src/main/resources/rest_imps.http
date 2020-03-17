@@ -17,3 +17,22 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://203.199.32.92:7474/imps-web-bc/api/transaction/bc/IBCMon00046/p2a
+Content-Type: application/json
+
+{
+   "BeneAccNo"       : "111234567890",
+   "BeneIFSC"        : "DLXB0000092",
+   "Amount"          : "1",
+   "TranRefNo"       : "123132128834556",
+   "PaymentRef"      : "FTTransferP2P",
+   "RemName"         : "RenName",
+   "RemMobile"       : "9860001122",
+   "RetailerCode"    : "rcode",
+   "PassCode"        : "a9a42043d31945c0bbb87f6fc5d0b31e",
+   "TransactionDate" : "20150707171319"
+
+}
+
+###
