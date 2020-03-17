@@ -37,6 +37,6 @@ public class ImpsP2aRequestDto {
     @ApiModelProperty(required = true, hidden = false, value = "a9a42043d31945c0bbb87f6fc5d0b31e", example = "a9a42043d31945c0bbb87f6fc5d0b31e" )
     private String PassCode;
 
-    @ApiModelProperty(required = true, hidden = false, value = "20150707171319", example = "20150707171319" )
-    private String TransactionDate;
+//    @ApiModelProperty(required = true, hidden = false, value = "20150707171319", example = "20150707171319" )
+//    private String TransactionDate;
 }

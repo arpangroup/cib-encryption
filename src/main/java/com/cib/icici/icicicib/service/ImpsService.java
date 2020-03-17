@@ -74,7 +74,7 @@ public class ImpsService {
         map.add("RemMobile"      , impsP2aRequestDto.getRemMobile());
         map.add("RetailerCode"   , impsP2aRequestDto.getRetailerCode());
         map.add("PassCode"       , impsP2aRequestDto.getPassCode());
-        map.add("TransactionDate", impsP2aRequestDto.getTransactionDate());
+        //map.add("TransactionDate", impsP2aRequestDto.getTransactionDate());
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
