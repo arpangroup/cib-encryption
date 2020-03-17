@@ -15,7 +15,6 @@ public class ImpsApiController {
     @Autowired
     ImpsService impsService;
 
-
     //localhost:8082/api/v1/imps/p2a
     @PostMapping("/p2a")
     public ResponseEntity<String>registerApi(@RequestBody ImpsP2aRequestDto impsP2aRequestDto) throws Exception{
