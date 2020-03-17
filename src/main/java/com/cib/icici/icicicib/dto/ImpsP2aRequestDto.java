@@ -17,8 +17,7 @@ public class ImpsP2aRequestDto {
     @ApiModelProperty(required = true, hidden = false, value = "DLXB0000092", example = "DLXB0000092" )
     private String BeneIFSC;
 
-    @ApiModelProperty(required = true, hidden = false, value = "1", example = "1" )
-    private String Amount;
+    private Integer Amount;
 
     @ApiModelProperty(required = true, hidden = false, value = "123132128834556", example = "123132128834556" )
     private String TranRefNo;
